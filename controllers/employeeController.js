@@ -1,8 +1,8 @@
-const employeeService = require('../services/employeeService');
-
+import employeeService from '../services/employeeService.js'
 // Controller function to login user
 
-async function loginUser(req, res) {
+class employeeController{
+static async loginUser(req, res) {
   const { username, password } = req.body;
   try{
     const token = await employeeService.login(username, password);
@@ -13,7 +13,7 @@ async function loginUser(req, res) {
 }
 
 // Controller function to get an employee by ID
-async function getEmployeeById(req, res) {
+static async getEmployeeById(req, res) {
   const { id } = req.params;
   try {
     const employee = await employeeService.getEmployeeById(id);
@@ -24,9 +24,8 @@ async function getEmployeeById(req, res) {
 }
 
 // Controller function to create a new employee
-async function createEmployee(req, res) {
+static async createEmployee(req, res) {
   const employeeData = req.body;
-  console.log(req.body);
   try {
     const newEmployee = await employeeService.createEmployee(employeeData);
     res.status(201).json(newEmployee);
@@ -36,7 +35,7 @@ async function createEmployee(req, res) {
 }
 
 // Controller function to update an employee by ID
-async function updateEmployeeById(req, res) {
+static async updateEmployeeById(req, res) {
   const { id } = req.params;
   const employeeData = req.body;
   try {
@@ -48,7 +47,7 @@ async function updateEmployeeById(req, res) {
 }
 
 // Controller function to delete an employee by ID
-async function deleteEmployeeById(req, res) {
+static async deleteEmployeeById(req, res) {
   const { id } = req.params;
   try {
     await employeeService.deleteEmployeeById(id);
@@ -59,7 +58,7 @@ async function deleteEmployeeById(req, res) {
 }
 
 // Controller function to get employees by age range
-async function getEmployeesByAgeRange(req, res) {
+static async getEmployeesByAgeRange(req, res) {
   const { minAge, maxAge, page, limit } = req.query;
   // Convert page and limit to numbers and provide default values
   const pageNumber = parseInt(page) || 1;
@@ -84,12 +83,6 @@ async function getEmployeesByAgeRange(req, res) {
     res.status(500).json({ error: 'Internal server error' });
   }
 }
+}
 
-module.exports = {
-  loginUser,
-  getEmployeeById,
-  createEmployee,
-  updateEmployeeById,
-  deleteEmployeeById,
-  getEmployeesByAgeRange
-};
+export default employeeController;

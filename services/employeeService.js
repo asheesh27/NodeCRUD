@@ -1,11 +1,11 @@
-const Employee = require('../models/employee');
-const { Op } = require('sequelize');
-const jwt = require('jsonwebtoken');
+import Employee from '../models/employee.js';
+import Op from 'sequelize';
+import jwt from 'jsonwebtoken';
 
+class employeeService{
 // Service function to login
-async function login(username, password){
+static async login(username, password){
   if (username === 'admin' && password === 'password') {
-    console.log(username, password);
     const token = jwt.sign({ username }, 'Qwerty123');
     return token;
   } else {
@@ -14,7 +14,7 @@ async function login(username, password){
 }
 
 // Service function to get an employee by ID
-async function getEmployeeById(id) {
+static async getEmployeeById(id) {
   try {
     const employee = await Employee.findByPk(id);
     if (!employee) {
@@ -27,7 +27,7 @@ async function getEmployeeById(id) {
 }
 
 // Service function to create a new employee
-async function createEmployee(employeeData) {
+static async createEmployee(employeeData) {
   try {
     const newEmployee = await Employee.create(employeeData);
     return newEmployee;
@@ -37,7 +37,7 @@ async function createEmployee(employeeData) {
 }
 
 // Service function to update an employee by ID
-async function updateEmployeeById(id, employeeData) {
+static async updateEmployeeById(id, employeeData) {
   try {
     const employee = await Employee.findByPk(id);
     if (!employee) {
@@ -51,7 +51,7 @@ async function updateEmployeeById(id, employeeData) {
 }
 
 // Service function to delete an employee by ID
-async function deleteEmployeeById(id) {
+static async deleteEmployeeById(id) {
   try {
     const employee = await Employee.findByPk(id);
     if (!employee) {
@@ -64,7 +64,7 @@ async function deleteEmployeeById(id) {
 }
 
 // Service function to get employees by age range
-async function getEmployeesByAgeRange(minAge, maxAge, pageNumber, limitNumber) {
+static async getEmployeesByAgeRange(minAge, maxAge, pageNumber, limitNumber) {
   console.log("hello");
   const offset = (pageNumber - 1) * limitNumber;
   try{
@@ -91,12 +91,6 @@ async function getEmployeesByAgeRange(minAge, maxAge, pageNumber, limitNumber) {
     throw new Error('Error getting employees');
   }
 }
+}
 
-module.exports = {
-  login,
-  getEmployeeById,
-  createEmployee,
-  updateEmployeeById,
-  deleteEmployeeById,
-  getEmployeesByAgeRange
-};
+export default employeeService;

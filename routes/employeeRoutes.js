@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const employeeController = require('../controllers/employeeController');
+import employeeController from '../controllers/employeeController.js';
 
 //POST /Login
 router.post('/login', employeeController.loginUser);
@@ -20,4 +20,4 @@ router.delete('/employee/:id', employeeController.deleteEmployeeById);
 // GET /api/employees?minAge=a&maxAge=b
 router.get('/employees', employeeController.getEmployeesByAgeRange);
 
-module.exports = router;
+export default router;

@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes } = require('sequelize');
+import { Sequelize, DataTypes } from 'sequelize';
 const sequelize = new Sequelize('db', 'root', 'palnar123', {
   host: 'localhost',
   dialect: 'mariadb',
@@ -39,4 +39,4 @@ const Employee = sequelize.define('Employee', {
     timestamps: false
   });
 
-module.exports = Employee;
+export default Employee;
