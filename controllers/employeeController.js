@@ -6,9 +6,13 @@ static async loginUser(req, res) {
   const { username, password } = req.body;
   try{
     const token = await employeeService.login(username, password);
+    // if(token===null){
+    //   throw new Error("token not generated")
+    // }
     res.json({ token });
+    // return {token};
   } catch (error) {
-    res.status(404).json({ error: 'Not Admin' });
+    res.status(404).json({ error:error.message });
   }
 }
 
