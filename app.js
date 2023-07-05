@@ -20,12 +20,20 @@ app.listen(config.development.server.port, () => {
 
 function authenticateToken(req, res, next) {
   const authHeader = req.headers.authorization;
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 789e2056aa6e8e0fe9442774f4f91ef660a50767
   // Exclude authentication for /login route
   if (req.originalUrl === '/api/login') {
     console.log('Skipping authentication for /login');
     return next();
   }
+<<<<<<< HEAD
   console.log('Checking Authentication');
+=======
+
+>>>>>>> 789e2056aa6e8e0fe9442774f4f91ef660a50767
   if (authHeader && authHeader.startsWith('Bearer ')) {
     const token = authHeader.split(' ')[1];
 
